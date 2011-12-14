@@ -24,6 +24,9 @@ Cinch uses Java annotations to reflectively wire up Models, Views, and Controlle
 * Please file issues on the [Github Issue Tracker](/palantir/Cinch/issues)
 * Email project admin: [Ari Gesher](mailto:agesher@palantir.com)
 
+## Authors #
+
+[Dan Cervelli](https://github.com/dcervelli)
 
 ## License #
 
