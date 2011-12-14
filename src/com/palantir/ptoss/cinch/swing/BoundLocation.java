@@ -3,12 +3,12 @@
 //   Licensed under the Apache License, Version 2.0 (the "License");
 //   you may not use this file except in compliance with the License.
 //   You may obtain a copy of the License at
-// 
+//
 //       http://www.apache.org/licenses/LICENSE-2.0
-// 
+//
 //   Unless required by applicable law or agreed to in writing, software
 //   distributed under the License is distributed on an "AS IS" BASIS,
-//   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.   
+//   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 //   See the License for the specific language governing permissions and
 //   limitations under the License.
 package com.palantir.ptoss.cinch.swing;
@@ -35,97 +35,97 @@ import com.palantir.ptoss.util.Throwables;
 
 /**
  * A binding for an interface component that has a location (setLocation/getLocation methods).
- * 
+ *
  * @see Point
  */
 @Retention(RetentionPolicy.RUNTIME)
 @Target({ElementType.FIELD})
 public @interface BoundLocation {
-	/**
-	 * The model property to bind to.
-	 */
-	String to();
-	
-	/**
-	 * When this binding should occur.
-	 */
-	String on() default "";
-	
-	/**
-	 * Inner utility class that performs the runtime wiring of all {@link BoundLocation} bindings.
-	 * 
-	 * @see Bindings#STANDARD_BINDINGS
-	 */
-	public static class Wiring implements BindingWiring {
-		private static final Logger logger = Logger.getLogger(BoundLocation.class);
-		
-		public Collection<Binding> wire(BindingContext context) {
-			List<Field> boundFields = context.getAnnotatedFields(BoundLocation.class);
-			List<Binding> bindings = Lists.newArrayList();
-		    for (Field field : boundFields) {
-		    	BoundLocation bound = field.getAnnotation(BoundLocation.class);
-		    	try {
-		    		bindings.addAll(wire(bound, context, field));
-		    	} catch (Exception e) {
-		    		throw Throwables.throwUncheckedException(e);
-		    	}
-		    }
-		    return bindings;
-		}
-		
-		private static Collection<Binding> wire(BoundLocation bound, BindingContext context, Field field) throws IntrospectionException {
-			String target = bound.to();
+    /**
+     * The model property to bind to.
+     */
+    String to();
+
+    /**
+     * When this binding should occur.
+     */
+    String on() default "";
+
+    /**
+     * Inner utility class that performs the runtime wiring of all {@link BoundLocation} bindings.
+     *
+     * @see Bindings#STANDARD_BINDINGS
+     */
+    public static class Wiring implements BindingWiring {
+        private static final Logger logger = Logger.getLogger(BoundLocation.class);
+
+        public Collection<Binding> wire(BindingContext context) {
+            List<Field> boundFields = context.getAnnotatedFields(BoundLocation.class);
+            List<Binding> bindings = Lists.newArrayList();
+            for (Field field : boundFields) {
+                BoundLocation bound = field.getAnnotation(BoundLocation.class);
+                try {
+                    bindings.addAll(wire(bound, context, field));
+                } catch (Exception e) {
+                    throw Throwables.throwUncheckedException(e);
+                }
+            }
+            return bindings;
+        }
+
+        private static Collection<Binding> wire(BoundLocation bound, BindingContext context, Field field) throws IntrospectionException {
+            String target = bound.to();
             final ObjectFieldMethod setter = context.findSetter(target);
             final ObjectFieldMethod getter = context.findGetter(target);
             if (setter == null || getter == null) {
-            	throw new IllegalArgumentException("could not finder setter/getter for @BoundLocation: " + field); 
+                throw new IllegalArgumentException("could not finder setter/getter for @BoundLocation: " + field);
             }
             final BindableModel model1 = context.getFieldObject(setter.getField(), BindableModel.class);
             final BindableModel model2 = context.getFieldObject(getter.getField(), BindableModel.class);
             assert model1 == model2;
-			if (Component.class.isAssignableFrom(field.getType())) {
-				final Component comp = context.getFieldObject(field, Component.class);
-				return bindComponent(bound, context, comp, setter, getter, model1);
-			} else {
-				throw new IllegalArgumentException("don't know how to wire up @BoundLocation field: " + field.getName()); 	
-			}
-		}
+            if (Component.class.isAssignableFrom(field.getType())) {
+                final Component comp = context.getFieldObject(field, Component.class);
+                return bindComponent(bound, context, comp, setter, getter, model1);
+            } else {
+                throw new IllegalArgumentException("don't know how to wire up @BoundLocation field: " + field.getName());
+            }
+        }
 
-		private static Collection<Binding> bindComponent(BoundLocation bound,
-				BindingContext context,
-				final Component comp,
+        private static Collection<Binding> bindComponent(BoundLocation bound,
+                BindingContext context,
+                final Component comp,
                 final ObjectFieldMethod setter, final ObjectFieldMethod getter,
                 final BindableModel model1) {
-	        
-			String on = bound.on();
-			final Object onObject = context.evalOnObject(on, model1);
-			
-			comp.addComponentListener(new ComponentAdapter() {
-				@Override
-				public void componentMoved(ComponentEvent e) {
-					try {
-        				setter.getMethod().invoke(model1, comp.getLocation());
+
+            String on = bound.on();
+            final Object onObject = context.evalOnObject(on, model1);
+
+            comp.addComponentListener(new ComponentAdapter() {
+                @Override
+                public void componentMoved(ComponentEvent e) {
+                    try {
+                        setter.getMethod().invoke(model1, comp.getLocation());
                     } catch (Exception ex) {
-                    	logger.error("could not invoke Component binding", ex); 
+                        logger.error("could not invoke Component binding", ex);
                     }
-				}
-			});
-			
-	        Binding binding = new Binding() {
-	        	public <T extends Enum<?> & ModelUpdate> void update(T... changed) {
-	        		if (!BindingContext.isOn(onObject, changed)) {
-	        			return;
-	        		}
-	        		try {
-	                    Point point = (Point)getter.getMethod().invoke(model1);
-	                    comp.setLocation(point);
-	        		} catch (Exception ex) {
-	                	logger.error("could not invoke Component binding", ex); 
-	                }
-	            }
-	        };
-	        model1.bind(binding);
-	        return Collections.singleton(binding);
+                }
+            });
+
+            Binding binding = new Binding() {
+                public <T extends Enum<?> & ModelUpdate> void update(T... changed) {
+                    if (!BindingContext.isOn(onObject, changed)) {
+                        return;
+                    }
+                    try {
+                        Point point = (Point)getter.getMethod().invoke(model1);
+                        comp.setLocation(point);
+                    } catch (Exception ex) {
+                        logger.error("could not invoke Component binding", ex);
+                    }
+                }
+            };
+            model1.bind(binding);
+            return Collections.singleton(binding);
         }
-	}
+    }
 }

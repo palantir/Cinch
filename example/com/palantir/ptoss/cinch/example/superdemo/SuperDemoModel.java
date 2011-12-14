@@ -3,12 +3,12 @@
 //   Licensed under the Apache License, Version 2.0 (the "License");
 //   you may not use this file except in compliance with the License.
 //   You may obtain a copy of the License at
-// 
+//
 //       http://www.apache.org/licenses/LICENSE-2.0
-// 
+//
 //   Unless required by applicable law or agreed to in writing, software
 //   distributed under the License is distributed on an "AS IS" BASIS,
-//   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.   
+//   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 //   See the License for the specific language governing permissions and
 //   limitations under the License.
 package com.palantir.ptoss.cinch.example.superdemo;
@@ -17,16 +17,16 @@ import com.palantir.ptoss.cinch.core.DefaultBindableModel;
 
 public class SuperDemoModel extends DefaultBindableModel {
 
-	private boolean someBoolean;
-	
-	public void setSomeBoolean(boolean someBoolean) {
-	    this.someBoolean = someBoolean;
-	    System.out.println("boolean: " + this.someBoolean);
-	    update();
+    private boolean someBoolean;
+
+    public void setSomeBoolean(boolean someBoolean) {
+        this.someBoolean = someBoolean;
+        System.out.println("boolean: " + this.someBoolean);
+        update();
     }
-	
-	public boolean isSomeBoolean() {
-	    return someBoolean;
+
+    public boolean isSomeBoolean() {
+        return someBoolean;
     }
-	
+
 }
