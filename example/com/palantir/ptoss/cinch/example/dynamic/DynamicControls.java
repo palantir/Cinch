@@ -11,7 +11,7 @@
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
-package com.palantir.ptoss.cinch.example;
+package com.palantir.ptoss.cinch.example.dynamic;
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;
@@ -29,10 +29,10 @@ import javax.swing.JPanel;
 import javax.swing.JSlider;
 
 import com.google.common.collect.Lists;
-import com.palantir.ptoss.cinch.BooleanModel;
 import com.palantir.ptoss.cinch.core.Bindings;
 import com.palantir.ptoss.cinch.core.CallOnUpdate;
 import com.palantir.ptoss.cinch.core.DefaultBindableModel;
+import com.palantir.ptoss.cinch.example.Examples;
 import com.palantir.ptoss.cinch.swing.Bound;
 
 /**
@@ -40,6 +40,19 @@ import com.palantir.ptoss.cinch.swing.Bound;
  * between 1 and 10 that controls how many checkboxes should be shown.
  */
 public class DynamicControls {
+
+    public static class BooleanModel extends DefaultBindableModel {
+        boolean state = false;
+
+        public boolean isState() {
+            return state;
+        }
+
+        public void setState(boolean state) {
+            this.state = state;
+            update();
+        }
+    }
 
     public static class DynamicModel extends DefaultBindableModel {
         // The number of dynamic controls
@@ -102,7 +115,7 @@ public class DynamicControls {
             bindings.release(model);
         }
     }
-
+    
     private final DynamicModel model = new DynamicModel();
 
     private final JPanel panel = new JPanel();
@@ -137,7 +150,8 @@ public class DynamicControls {
         panel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
     }
 
-    @CallOnUpdate
+	@SuppressWarnings("unused")
+	@CallOnUpdate
     private void synchCheckboxes() {
         // It's important to remove transient listeners to long-lived models
         for (BooleanComponent component : checkboxComponents) {
