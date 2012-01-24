@@ -27,7 +27,7 @@ import com.palantir.ptoss.cinch.swing.BoundSelection;
 
 public class BoundJComboBoxTest extends TestCase {
 
-    public static class JComboTestModel extends DefaultBindableModel {
+    private static class JComboTestModel extends DefaultBindableModel {
         private String selectedComboItem;
 
         public List<String> getComboList() {
@@ -59,7 +59,7 @@ public class BoundJComboBoxTest extends TestCase {
     @Bound(to = "comboList", nullValue = "null value")
     @BoundSelection(to = "selectedComboItem", nullValue = "null value")
     private final JComboBox directNullBox = new JComboBox();
-
+    
     private final Bindings bindings = new Bindings();
 
     @Override
