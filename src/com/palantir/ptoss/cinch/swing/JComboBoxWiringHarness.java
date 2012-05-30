@@ -15,17 +15,21 @@ package com.palantir.ptoss.cinch.swing;
 
 import java.beans.IntrospectionException;
 import java.lang.reflect.Field;
-import java.lang.reflect.Method;
 import java.util.Collection;
-import java.util.Collections;
 import java.util.List;
 
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JComboBox;
 
-import com.palantir.ptoss.cinch.core.*;
+import com.google.common.collect.ImmutableList;
+import com.palantir.ptoss.cinch.core.BindableModel;
+import com.palantir.ptoss.cinch.core.Binding;
+import com.palantir.ptoss.cinch.core.BindingContext;
+import com.palantir.ptoss.cinch.core.ModelUpdate;
+import com.palantir.ptoss.cinch.core.WiringHarness;
 import com.palantir.ptoss.cinch.swing.Bound.Utilities;
 import com.palantir.ptoss.cinch.swing.Bound.Wiring;
+import com.palantir.ptoss.util.Mutator;
 
 /**
  * A {@link WiringHarness} for binding a {@link JComboBox} to a {@link List} value in a
@@ -35,29 +39,27 @@ public class JComboBoxWiringHarness implements WiringHarness<Bound, Field> {
     public Collection<Binding> wire(Bound bound, BindingContext context, Field field) throws IllegalAccessException, IntrospectionException {
         String target = bound.to();
         JComboBox combo = context.getFieldObject(field, JComboBox.class);
-        ObjectFieldMethod getter = context.findGetter(target);
-        BindableModel model = context.getFieldObject(getter.getField(), BindableModel.class);
-        // verify type parameters
-        return bindJComboBox(bound, context, model, combo, getter.getMethod());
+        Mutator mutator = Mutator.create(context, target);
+        final String nullValue = (String)Utilities.getNullValue(context, bound.nullValue());
+        return ImmutableList.of(bindJComboBox(bound, mutator, combo, nullValue));
     }
 
-    private Collection<Binding> bindJComboBox(final Bound bound, final BindingContext context, final BindableModel model, final JComboBox combo, final Method getter) {
-        final List<Object> ons = BindingContext.getOnObjects(bound.on(), model);
-        final String nullValue = (String)Utilities.getNullValue(context, bound.nullValue());
+    private Binding bindJComboBox(final Bound bound, final Mutator mutator, final JComboBox combo, final String nullValue) {
+        final List<Object> ons = BindingContext.getOnObjects(bound.on(), mutator.getModel());
         Binding binding = new Binding() {
             public <T extends Enum<?> & ModelUpdate> void update(T... changed) {
                 if (!BindingContext.isOn(ons, changed)) {
                     return;
                 }
                 try {
-                    updateComboModel(combo, (List<?>)getter.invoke(model), nullValue);
+                    updateComboModel(combo, (List<?>)mutator.get(), nullValue);
                 } catch (Exception ex) {
                     Wiring.logger.error("exception in JList binding", ex);
                 }
             }
         };
-        model.bind(binding);
-        return Collections.singleton(binding);
+        mutator.getModel().bind(binding);
+        return binding;
     }
 
     private void updateComboModel(JComboBox combo, List<?> newContents, String nullValue) {
