@@ -13,7 +13,7 @@
 //   limitations under the License.
 /**
  * The core classes that implement the cinch binding framework -
- * see <a href='http://github.com/palantir/Cinch/wiki'>the Cinch Wiki</a>
+ * see <a href=http://github.com/palantir/Cinch/wiki target=_new>the Cinch Wiki</a>
  * for full documentation.
  */
 package com.palantir.ptoss.cinch.core;

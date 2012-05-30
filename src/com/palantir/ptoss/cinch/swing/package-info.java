@@ -13,7 +13,7 @@
 //   limitations under the License.
 /**
  * Classes used to bind Swing components to {@link com.palantir.ptoss.cinch.core.BindableModel} objects -
- * see <a href='http://github.com/palantir/Cinch/wiki'>the Cinch Wiki</a>
+ * see <a href=http://github.com/palantir/Cinch/wiki target=_blank>the Cinch Wiki</a>
  * for full documentation.
  */
 package com.palantir.ptoss.cinch.swing;
