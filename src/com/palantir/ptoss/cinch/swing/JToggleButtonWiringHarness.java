@@ -53,7 +53,7 @@ public class JToggleButtonWiringHarness implements WiringHarness<Bound, Field> {
         } else if (paramTypes.length == 1 && paramTypes[0] == boolean.class) {
             String value = bound.value();
             if (Strings.isNullOrEmpty(value)) {
-                return ImmutableList.of(JCheckBoxWiringHarness.bindJCheckBox(mutator, toggle));
+                return ImmutableList.of(AbstractButtonWiringHarness.bindAbstractButton(mutator, toggle));
             } else {
                 return ImmutableList.of(bindJToggleButtonToBoolean(bound.value(), mutator, toggle));
             }
