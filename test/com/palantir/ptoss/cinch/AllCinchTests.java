@@ -45,6 +45,7 @@ public class AllCinchTests {
         suite.addTestSuite(BoundJComboBoxTest.class);
         suite.addTestSuite(BoundJProgressBarTest.class);
         suite.addTestSuite(BoundJCheckBoxTest.class);
+        suite.addTestSuite(BoundJCheckBoxMenuItemTest.class);
         suite.addTestSuite(BoundJToggleButtonTest.class);
         suite.addTestSuite(BoundJSliderTest.class);
         suite.addTestSuite(BoundJTextComponentTest.class);
