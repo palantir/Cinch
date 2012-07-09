@@ -22,7 +22,7 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 
-import javax.swing.JCheckBox;
+import javax.swing.AbstractButton;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JList;
@@ -128,7 +128,7 @@ public @interface Bound {
 
         private static Map<Class<?>, WiringHarness<Bound, Field>> wiringHarnesses =
             ImmutableMap.<Class<?>, WiringHarness<Bound, Field>>builder()
-                .put(JCheckBox.class, new JCheckBoxWiringHarness())
+                .put(AbstractButton.class, new AbstractButtonWiringHarness())
                 .put(JRadioButton.class, new JToggleButtonWiringHarness())
                 .put(JToggleButton.class, new JToggleButtonWiringHarness())
                 .put(JSlider.class, new JSliderWiringHarness())

@@ -21,6 +21,8 @@ import java.util.Collection;
 
 import javax.swing.AbstractButton;
 import javax.swing.JCheckBox;
+import javax.swing.JCheckBoxMenuItem;
+import javax.swing.JToggleButton;
 
 import com.google.common.collect.ImmutableList;
 import com.palantir.ptoss.cinch.core.BindableModel;
@@ -32,35 +34,36 @@ import com.palantir.ptoss.cinch.swing.Bound.Wiring;
 import com.palantir.ptoss.util.Mutator;
 
 /**
- * A {@link WiringHarness} for binding a {@link JCheckBox} to a boolean value in a
- * {@link BindableModel}.
+ * A {@link WiringHarness} for binding an {@link AbstractButton}, such as a
+ * {@link JCheckBox}, {@link JToggleButton}, or {@link JCheckBoxMenuItem},
+ * to a boolean value in a {@link BindableModel}.
  */
-public class JCheckBoxWiringHarness implements WiringHarness<Bound, Field> {
+public class AbstractButtonWiringHarness implements WiringHarness<Bound, Field> {
 
     public Collection<Binding> wire(Bound bound, BindingContext context, Field field)
             throws IllegalAccessException, IntrospectionException {
         Mutator mutator = Mutator.create(context, bound.to());
-        JCheckBox checkbox = context.getFieldObject(field, JCheckBox.class);
-        return ImmutableList.of(bindJCheckBox(mutator, checkbox));
+        AbstractButton abstractButton = context.getFieldObject(field, AbstractButton.class);
+        return ImmutableList.of(bindAbstractButton(mutator, abstractButton));
     }
 
-    public static Binding bindJCheckBox(
-            final Mutator mutator, final AbstractButton checkbox) {
-        checkbox.addActionListener(new ActionListener() {
+    public static Binding bindAbstractButton(
+            final Mutator mutator, final AbstractButton abstractButton) {
+    	abstractButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 try {
-                    mutator.set(checkbox.isSelected());
+                    mutator.set(abstractButton.isSelected());
                 } catch (Exception ex) {
-                    Wiring.logger.error("exception in JCheckBox binding", ex);
+                    Wiring.logger.error("exception in AbstractButton binding", ex);
                 }
             }
         });
         Binding binding = new Binding() {
             public <T extends Enum<?> & ModelUpdate> void update(T... changed) {
                 try {
-                    checkbox.setSelected((Boolean)mutator.get());
+                	abstractButton.setSelected((Boolean)mutator.get());
                 } catch (Exception ex) {
-                    Wiring.logger.error("exception in JCheckBox binding", ex);
+                    Wiring.logger.error("exception in AbstractButton binding", ex);
                 }
             }
         };
