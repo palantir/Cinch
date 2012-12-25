@@ -1,6 +1,3 @@
-> Disclaimer: Palantir Technologies is not affiliated with, endorsed or sponsored by [Palantir.net](http://palantir.net/), Inc. 
-> Palantir.net's website is http://palantir.net 
-
 ![Palantir Logo](/palantir/Cinch/wiki/palantir-masthead.png)
 # Cinch - annotations to make MVC easy #
 
