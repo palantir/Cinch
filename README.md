@@ -1,4 +1,4 @@
-![Palantir Logo](/palantir/Cinch/wiki/palantir-masthead.png)
+![Palantir Logo](https://github.com/palantir/Cinch/wiki/palantir-masthead.png)
 # Cinch - annotations to make MVC easy #
 
 ---
