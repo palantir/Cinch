@@ -187,7 +187,7 @@ public @interface BoundSelection {
                     try {
                         Object current = mutator.get();
                         Object newValue = combo.getSelectedItem();
-                        if (newValue.equals(nullValue)) {
+                        if (newValue != null && newValue.equals(nullValue)) {
                             newValue = null;
                         }
                         if (!Objects.equal(current, newValue)) {
