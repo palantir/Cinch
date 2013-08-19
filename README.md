@@ -13,7 +13,7 @@ Cinch uses Java annotations to reflectively wire up Models, Views, and Controlle
 
 ### Project Resources #
 
-* The [Wiki](/palantir/Cinch/wiki) has all the project documentation.
+* The [Wiki](http://github.com/palantir/Cinch/wiki) has all the project documentation.
 * API docs are available [here](http://palantir.github.com/Cinch/apidocs)
 * Mailing lists are hosted on Google Groups:
     * [Announce](http://groups.google.com/group/ptoss-cinch-announce)
