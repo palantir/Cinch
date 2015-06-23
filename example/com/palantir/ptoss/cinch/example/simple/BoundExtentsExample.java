@@ -128,7 +128,6 @@ public class BoundExtentsExample {
         try {
             UIManager.setLookAndFeel(UIManager.getCrossPlatformLookAndFeelClassName());
             EventQueue.invokeAndWait(new Runnable() {
-                @Override
                 public void run() {
                     new BoundExtentsExample();
                 }

@@ -47,7 +47,6 @@ public @interface LoggedModel {
     String logger() default "cinch.debug";
 
     static class Wiring implements BindingWiring {
-        @Override
         public Collection<Binding> wire(BindingContext context) {
             List<Field> loggedModels = context.getAnnotatedFields(LoggedModel.class);
             List<Binding> bindings = Lists.newArrayList();
@@ -58,7 +57,6 @@ public @interface LoggedModel {
                 if (BindableModel.class.isAssignableFrom(field.getType())) {
                     BindableModel model = context.getFieldObject(field, BindableModel.class);
                     Binding binding = new Binding() {
-                        @Override
                         public <T extends Enum<?> & ModelUpdate> void update(T... changed) {
                             for (T t : changed){
                                 Logger logger = LoggerFactory.getLogger(loggerParam);

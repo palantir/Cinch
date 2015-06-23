@@ -54,7 +54,6 @@ public @interface CallOnUpdate {
     static class Wiring implements BindingWiring {
         private static final Logger logger = LoggerFactory.getLogger(CallOnUpdate.class);
 
-        @Override
         public Collection<Binding> wire(final BindingContext context) {
             final List<ObjectFieldMethod> methods = context.getAnnotatedParameterlessMethods(CallOnUpdate.class);
             final List<Binding> bindings = Lists.newArrayList();
@@ -91,7 +90,6 @@ public @interface CallOnUpdate {
             final Method actualMethod = method.getMethod();
             actualMethod.setAccessible(true);
             final Binding binding = new Binding() {
-                @Override
                 public <T extends Enum<?> & ModelUpdate> void update(final T... changed) {
                     if (!BindingContext.isOn(onObjects, changed)) {
                         return;

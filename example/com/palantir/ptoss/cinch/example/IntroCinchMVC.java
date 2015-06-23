@@ -187,7 +187,6 @@ public class IntroCinchMVC {
 
     public static void main(String[] args) throws InterruptedException, InvocationTargetException {
         EventQueue.invokeAndWait(new Runnable() {
-            @Override
             public void run() {
                 IntroCinchMVC example = new IntroCinchMVC();
                 JFrame frame = Examples.getFrameFor("Cinch Email Example", example.panel);

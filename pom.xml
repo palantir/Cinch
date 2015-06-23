@@ -115,7 +115,7 @@
 				<version>1.7</version>
 				<executions>
 					<execution>
-						<id>add-test-source</id>
+						<id>add-source</id>
 						<phase>generate-sources</phase>
 						<goals>
 							<goal>add-source</goal>

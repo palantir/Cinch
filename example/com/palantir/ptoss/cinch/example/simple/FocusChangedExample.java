@@ -152,7 +152,6 @@ public class FocusChangedExample {
         try {
             UIManager.setLookAndFeel(UIManager.getCrossPlatformLookAndFeelClassName());
             EventQueue.invokeAndWait(new Runnable() {
-                @Override
                 public void run() {
                     new FocusChangedExample();
                 }
