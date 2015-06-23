@@ -15,11 +15,11 @@ package com.palantir.ptoss.cinch;
 
 import javax.swing.JButton;
 
-import junit.framework.TestCase;
-
 import com.palantir.ptoss.cinch.core.Bindable;
 import com.palantir.ptoss.cinch.core.Bindings;
 import com.palantir.ptoss.cinch.swing.Action;
+
+import junit.framework.TestCase;
 
 // This test exists because ideally you shouldn't have to specify "this.refresh" as below.
 public class AbstractBoundMethodTest extends TestCase {

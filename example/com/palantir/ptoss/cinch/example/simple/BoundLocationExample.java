@@ -25,8 +25,8 @@ import javax.swing.JFrame;
 import javax.swing.JInternalFrame;
 import javax.swing.UIManager;
 
-import org.apache.log4j.LogManager;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.palantir.ptoss.cinch.core.BindableModel;
 import com.palantir.ptoss.cinch.core.Bindings;
@@ -44,7 +44,7 @@ import com.palantir.ptoss.cinch.swing.BoundLocation;
  */
 public class BoundLocationExample extends JFrame {
 
-    static final Logger log = LogManager.getLogger(BoundLocationExample.class);
+    static final Logger log = LoggerFactory.getLogger(BoundLocationExample.class);
 
     private static final long serialVersionUID = 1L;
 

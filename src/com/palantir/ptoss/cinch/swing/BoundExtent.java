@@ -28,10 +28,17 @@ import javax.swing.JSlider;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.google.common.collect.Lists;
-import com.palantir.ptoss.cinch.core.*;
+import com.palantir.ptoss.cinch.core.BindableModel;
+import com.palantir.ptoss.cinch.core.Binding;
+import com.palantir.ptoss.cinch.core.BindingContext;
+import com.palantir.ptoss.cinch.core.BindingWiring;
+import com.palantir.ptoss.cinch.core.Bindings;
+import com.palantir.ptoss.cinch.core.ModelUpdate;
+import com.palantir.ptoss.cinch.core.ObjectFieldMethod;
 import com.palantir.ptoss.util.Throwables;
 
 /**
@@ -56,7 +63,7 @@ public @interface BoundExtent {
      * @see Bindings#STANDARD_BINDINGS
      */
     public static class Wiring implements BindingWiring {
-        private static final Logger logger = Logger.getLogger(BoundExtent.class);
+        private static final Logger logger = LoggerFactory.getLogger(BoundExtent.class);
 
         public Collection<Binding> wire(BindingContext context) {
             List<Field> boundFields = context.getAnnotatedFields(BoundExtent.class);

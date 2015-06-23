@@ -24,7 +24,8 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.google.common.collect.Lists;
 import com.palantir.ptoss.cinch.core.BindableModel;
@@ -60,7 +61,7 @@ public @interface VisibleIf {
      * Inner utility class that performs the runtime wiring of all {@link VisibleIf} bindings.
      */
     public static class Wiring implements BindingWiring {
-        private static final Logger logger = Logger.getLogger(VisibleIf.class);
+        private static final Logger logger = LoggerFactory.getLogger(VisibleIf.class);
 
         public Collection<Binding> wire(final BindingContext context) {
             final List<Field> actions = context.getAnnotatedFields(VisibleIf.class);

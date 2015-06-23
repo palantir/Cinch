@@ -18,7 +18,11 @@ import java.awt.EventQueue;
 import java.lang.reflect.InvocationTargetException;
 import java.util.List;
 
-import javax.swing.*;
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JList;
+import javax.swing.JPanel;
 
 import com.google.common.base.Joiner;
 import com.google.common.collect.ImmutableList;

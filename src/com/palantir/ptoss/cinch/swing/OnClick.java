@@ -26,7 +26,8 @@ import java.lang.reflect.Method;
 import java.util.Collection;
 import java.util.List;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.google.common.collect.ImmutableList;
 import com.palantir.ptoss.cinch.core.Binding;
@@ -65,7 +66,7 @@ public @interface OnClick {
      *     Inner utility class that performs the runtime wiring of all {@link OnClick} bindings.
      */
     static class Wiring implements BindingWiring {
-        private static final Logger logger = Logger.getLogger(OnClick.class);
+        private static final Logger logger = LoggerFactory.getLogger(OnClick.class);
 
         public Collection<Binding> wire(BindingContext context) {
             List<Field> actions = context.getAnnotatedFields(OnClick.class);

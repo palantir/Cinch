@@ -18,8 +18,6 @@ import java.util.List;
 
 import javax.swing.JList;
 
-import junit.framework.TestCase;
-
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Lists;
 import com.palantir.ptoss.cinch.core.Bindings;
@@ -27,6 +25,8 @@ import com.palantir.ptoss.cinch.core.DefaultBindableModel;
 import com.palantir.ptoss.cinch.core.ModelUpdate;
 import com.palantir.ptoss.cinch.swing.Bound;
 import com.palantir.ptoss.cinch.swing.BoundSelection;
+
+import junit.framework.TestCase;
 
 public class BoundJListTest extends TestCase {
 

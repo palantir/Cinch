@@ -18,11 +18,11 @@ import java.lang.reflect.InvocationTargetException;
 
 import javax.swing.JCheckBox;
 
-import junit.framework.TestCase;
-
 import com.palantir.ptoss.cinch.core.Bindings;
 import com.palantir.ptoss.cinch.core.DefaultBindableModel;
 import com.palantir.ptoss.cinch.swing.EnabledIf;
+
+import junit.framework.TestCase;
 
 public class EnabledIfTest extends TestCase {
 

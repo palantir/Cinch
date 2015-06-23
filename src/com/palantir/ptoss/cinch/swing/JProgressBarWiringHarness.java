@@ -21,7 +21,12 @@ import java.util.Collections;
 
 import javax.swing.JProgressBar;
 
-import com.palantir.ptoss.cinch.core.*;
+import com.palantir.ptoss.cinch.core.BindableModel;
+import com.palantir.ptoss.cinch.core.Binding;
+import com.palantir.ptoss.cinch.core.BindingContext;
+import com.palantir.ptoss.cinch.core.ModelUpdate;
+import com.palantir.ptoss.cinch.core.ObjectFieldMethod;
+import com.palantir.ptoss.cinch.core.WiringHarness;
 import com.palantir.ptoss.cinch.swing.Bound.Wiring;
 
 /**

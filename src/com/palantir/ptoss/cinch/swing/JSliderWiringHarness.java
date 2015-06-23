@@ -22,7 +22,11 @@ import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
 import com.google.common.collect.ImmutableList;
-import com.palantir.ptoss.cinch.core.*;
+import com.palantir.ptoss.cinch.core.BindableModel;
+import com.palantir.ptoss.cinch.core.Binding;
+import com.palantir.ptoss.cinch.core.BindingContext;
+import com.palantir.ptoss.cinch.core.ModelUpdate;
+import com.palantir.ptoss.cinch.core.WiringHarness;
 import com.palantir.ptoss.cinch.swing.Bound.Wiring;
 import com.palantir.ptoss.util.Mutator;
 

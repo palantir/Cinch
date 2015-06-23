@@ -15,11 +15,11 @@ package com.palantir.ptoss.cinch;
 
 import java.lang.reflect.InvocationTargetException;
 
-import junit.framework.TestCase;
-
 import com.palantir.ptoss.cinch.core.BindingContext;
 import com.palantir.ptoss.cinch.core.DefaultBindableModel;
 import com.palantir.ptoss.cinch.core.ObjectFieldMethod;
+
+import junit.framework.TestCase;
 
 public class BindingContextIndexTest extends TestCase {
 

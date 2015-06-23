@@ -13,14 +13,24 @@
 //   limitations under the License.
 package com.palantir.ptoss.cinch.example.simple;
 
-import java.awt.*;
+import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Component;
+import java.awt.EventQueue;
+import java.awt.Graphics;
+import java.awt.Rectangle;
 import java.lang.reflect.InvocationTargetException;
 
-import javax.swing.*;
+import javax.swing.DefaultBoundedRangeModel;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JSlider;
+import javax.swing.UIManager;
 import javax.swing.plaf.metal.MetalSliderUI;
 
-import org.apache.log4j.LogManager;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.palantir.ptoss.cinch.core.Bindings;
 import com.palantir.ptoss.cinch.core.DefaultBindableModel;
@@ -36,7 +46,7 @@ import com.palantir.ptoss.cinch.swing.BoundExtent;
  */
 public class BoundExtentsExample {
 
-    static final Logger log = LogManager.getLogger(BoundExtentsExample.class);
+    static final Logger log = LoggerFactory.getLogger(BoundExtentsExample.class);
 
     public static class Model extends DefaultBindableModel {
         private int sliderExtent;
@@ -118,6 +128,7 @@ public class BoundExtentsExample {
         try {
             UIManager.setLookAndFeel(UIManager.getCrossPlatformLookAndFeelClassName());
             EventQueue.invokeAndWait(new Runnable() {
+                @Override
                 public void run() {
                     new BoundExtentsExample();
                 }
@@ -143,6 +154,7 @@ public class BoundExtentsExample {
             }
         }
 
+        @Override
         protected void paintHorizontalLabel(Graphics g, int value, Component label) {
             final int extentLowerBound = slider.getMaximum() - slider.getExtent();
             setOriginalLabelColor(label.getForeground());
@@ -154,6 +166,7 @@ public class BoundExtentsExample {
             super.paintHorizontalLabel(g, value, label);
         }
 
+        @Override
         protected void paintMinorTickForHorizSlider(Graphics g, Rectangle tickBounds, int x) {
             super.paintMinorTickForHorizSlider(g, tickBounds, x);
             Color original = g.getColor();
@@ -164,6 +177,7 @@ public class BoundExtentsExample {
             g.setColor(original);
         }
 
+        @Override
         protected void paintMajorTickForHorizSlider(Graphics g, Rectangle tickBounds, int x) {
             super.paintMajorTickForHorizSlider(g, tickBounds, x);
             Color original = g.getColor();

@@ -15,11 +15,11 @@ package com.palantir.ptoss.cinch.negative;
 
 import javax.swing.JButton;
 
-import junit.framework.TestCase;
-
 import com.palantir.ptoss.cinch.core.Bindable;
 import com.palantir.ptoss.cinch.core.Bindings;
 import com.palantir.ptoss.cinch.swing.Action;
+
+import junit.framework.TestCase;
 
 public class InaccessibleControllerMethodTest extends TestCase {
 

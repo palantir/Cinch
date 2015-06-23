@@ -25,8 +25,8 @@ import javax.swing.SwingConstants;
 import javax.swing.UIManager;
 import javax.swing.event.ChangeEvent;
 
-import org.apache.log4j.LogManager;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.palantir.ptoss.cinch.core.Bindings;
 import com.palantir.ptoss.cinch.core.DefaultBindableModel;
@@ -44,7 +44,7 @@ import com.palantir.ptoss.cinch.swing.OnChange;
  */
 public class OnChangeExample {
 
-    static final Logger log = LogManager.getLogger(OnChangeExample.class);
+    static final Logger log = LoggerFactory.getLogger(OnChangeExample.class);
 
     public final Model model = new Model();
     public final JLabel label = new JLabel("Toggle: ");

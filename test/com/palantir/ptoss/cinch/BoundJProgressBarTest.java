@@ -15,11 +15,11 @@ package com.palantir.ptoss.cinch;
 
 import javax.swing.JProgressBar;
 
-import junit.framework.TestCase;
-
 import com.palantir.ptoss.cinch.core.Bindings;
 import com.palantir.ptoss.cinch.core.DefaultBindableModel;
 import com.palantir.ptoss.cinch.swing.Bound;
+
+import junit.framework.TestCase;
 
 public class BoundJProgressBarTest extends TestCase {
     public static class TestModel extends DefaultBindableModel {

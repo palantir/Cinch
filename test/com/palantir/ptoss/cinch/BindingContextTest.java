@@ -13,13 +13,13 @@
 //   limitations under the License.
 package com.palantir.ptoss.cinch;
 
-import junit.framework.TestCase;
-
 import com.palantir.ptoss.cinch.core.Bindable;
 import com.palantir.ptoss.cinch.core.BindingContext;
 import com.palantir.ptoss.cinch.core.Bindings;
 import com.palantir.ptoss.cinch.core.DefaultBindableModel;
 import com.palantir.ptoss.cinch.core.NotBindable;
+
+import junit.framework.TestCase;
 
 public class BindingContextTest extends TestCase {
 

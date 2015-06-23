@@ -13,13 +13,13 @@
 //   limitations under the License.
 package com.palantir.ptoss.cinch;
 
-import junit.framework.Test;
-import junit.framework.TestSuite;
-
 import com.palantir.ptoss.cinch.negative.CantFindGetterSetterTest;
 import com.palantir.ptoss.cinch.negative.InaccessibleControllerMethodTest;
 import com.palantir.ptoss.cinch.negative.NegativeActionTest;
 import com.palantir.ptoss.cinch.negative.WrongTypeTest;
+
+import junit.framework.Test;
+import junit.framework.TestSuite;
 
 public class AllCinchTests {
     public static Test suite() {

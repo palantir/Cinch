@@ -14,14 +14,8 @@
 package com.palantir.ptoss.cinch.example;
 
 import java.awt.Container;
-import java.io.PrintWriter;
 
 import javax.swing.JFrame;
-
-import org.apache.log4j.ConsoleAppender;
-import org.apache.log4j.Level;
-import org.apache.log4j.Logger;
-import org.apache.log4j.PatternLayout;
 
 /**
  * Utility code used by the examples.
@@ -29,11 +23,7 @@ import org.apache.log4j.PatternLayout;
 public class Examples {
 
     public static void initializeLogging() {
-        Logger.getRootLogger().setLevel(Level.INFO);
-        ConsoleAppender console = new ConsoleAppender();
-        console.setWriter(new PrintWriter(System.out));
-        console.setLayout(new PatternLayout("%d{ISO8601} %d %p [%t] %c - %m%n"));
-        Logger.getRootLogger().addAppender(console);
+        System.setProperty("org.slf4j.simpleLogger.defaultLogLevel", "INFO");
     }
 
     public static JFrame getFrameFor(String title, Container container) {

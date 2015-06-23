@@ -35,7 +35,8 @@ import javax.swing.text.JTextComponent;
 
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.lang.mutable.MutableBoolean;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.Lists;
@@ -124,7 +125,7 @@ public @interface Bound {
      * @see Bindings#STANDARD_BINDINGS
      */
     public static class Wiring implements BindingWiring {
-        static final Logger logger = Logger.getLogger(Bound.class);
+        static final Logger logger = LoggerFactory.getLogger(Bound.class);
 
         private static Map<Class<?>, WiringHarness<Bound, Field>> wiringHarnesses =
             ImmutableMap.<Class<?>, WiringHarness<Bound, Field>>builder()

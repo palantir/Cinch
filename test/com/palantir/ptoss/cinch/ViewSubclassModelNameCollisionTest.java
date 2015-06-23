@@ -13,11 +13,11 @@
 //   limitations under the License.
 package com.palantir.ptoss.cinch;
 
-import junit.framework.TestCase;
-
 import com.palantir.ptoss.cinch.core.Bindings;
 import com.palantir.ptoss.cinch.core.CallOnUpdate;
 import com.palantir.ptoss.cinch.core.DefaultBindableModel;
+
+import junit.framework.TestCase;
 
 public class ViewSubclassModelNameCollisionTest extends TestCase {
     class Model1 extends DefaultBindableModel {

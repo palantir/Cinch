@@ -26,7 +26,12 @@ import javax.swing.event.DocumentListener;
 
 import org.apache.commons.lang.Validate;
 
-import com.palantir.ptoss.cinch.core.*;
+import com.palantir.ptoss.cinch.core.BindableModel;
+import com.palantir.ptoss.cinch.core.Binding;
+import com.palantir.ptoss.cinch.core.BindingContext;
+import com.palantir.ptoss.cinch.core.ModelUpdate;
+import com.palantir.ptoss.cinch.core.ObjectFieldMethod;
+import com.palantir.ptoss.cinch.core.WiringHarness;
 import com.palantir.ptoss.cinch.swing.Bound.Wiring;
 
 // The interface uses char[] but has to make a String under the covers in order to set the password.

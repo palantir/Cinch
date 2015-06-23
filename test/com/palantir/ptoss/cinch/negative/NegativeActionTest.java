@@ -13,10 +13,10 @@
 //   limitations under the License.
 package com.palantir.ptoss.cinch.negative;
 
-import junit.framework.TestCase;
-
 import com.palantir.ptoss.cinch.core.Bindings;
 import com.palantir.ptoss.cinch.swing.Action;
+
+import junit.framework.TestCase;
 
 public class NegativeActionTest extends TestCase {
     @Action(call = "failure")

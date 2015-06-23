@@ -28,7 +28,8 @@ import java.util.List;
 import javax.swing.JButton;
 import javax.swing.JTextField;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.google.common.collect.ImmutableList;
 import com.palantir.ptoss.cinch.core.Bindable;
@@ -142,7 +143,7 @@ public @interface Action {
      * Inner utility class used to wire {@link Action} bindings.
      */
     static class Wiring implements BindingWiring {
-        private static final Logger logger = Logger.getLogger(Action.class);
+        private static final Logger logger = LoggerFactory.getLogger(Action.class);
 
         /**
          * Wires all {@link Action} bindings in the passed context.

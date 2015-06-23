@@ -22,9 +22,8 @@ import java.lang.reflect.Field;
 import java.util.Collection;
 import java.util.List;
 
-import org.apache.log4j.Level;
-import org.apache.log4j.LogManager;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.google.common.collect.Lists;
 import com.palantir.ptoss.cinch.core.BindableModel;
@@ -46,30 +45,25 @@ import com.palantir.ptoss.cinch.core.ModelUpdate;
 public @interface LoggedModel {
 
     String logger() default "cinch.debug";
-    String level() default "Info";
 
     static class Wiring implements BindingWiring {
+        @Override
         public Collection<Binding> wire(BindingContext context) {
             List<Field> loggedModels = context.getAnnotatedFields(LoggedModel.class);
             List<Binding> bindings = Lists.newArrayList();
             for (Field field : loggedModels) {
                 final LoggedModel annotation = field.getAnnotation(LoggedModel.class);
                 final String loggerParam = annotation.logger();
-                final String levelParam = annotation.level();
                 final String fieldName = field.getName();
-                final Level level = Level.toLevel(levelParam);
-                if(level == null){
-                    throw new IllegalArgumentException("'" + levelParam + "' is not a valid log4j level");
-                }
                 if (BindableModel.class.isAssignableFrom(field.getType())) {
                     BindableModel model = context.getFieldObject(field, BindableModel.class);
                     Binding binding = new Binding() {
+                        @Override
                         public <T extends Enum<?> & ModelUpdate> void update(T... changed) {
                             for (T t : changed){
-                                Logger logger = LogManager.getLogger(loggerParam);
-                                Level configuredLevel = logger.getLevel();
-                                if(configuredLevel == null || configuredLevel.isGreaterOrEqual(level)){
-                                    logger.log(level, t.toString() + ": " + fieldName, null);
+                                Logger logger = LoggerFactory.getLogger(loggerParam);
+                                if (logger.isInfoEnabled()) {
+                                    logger.info(t.toString() + ": " + fieldName);
                                 }
                             }
                         }

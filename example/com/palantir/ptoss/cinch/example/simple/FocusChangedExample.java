@@ -13,13 +13,23 @@
 //   limitations under the License.
 package com.palantir.ptoss.cinch.example.simple;
 
-import java.awt.*;
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.EventQueue;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
+import java.awt.Insets;
 import java.lang.reflect.InvocationTargetException;
 
-import javax.swing.*;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JTextField;
+import javax.swing.SwingConstants;
+import javax.swing.UIManager;
 
-import org.apache.log4j.LogManager;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.palantir.ptoss.cinch.core.Bindable;
 import com.palantir.ptoss.cinch.core.Bindings;
@@ -30,8 +40,7 @@ import com.palantir.ptoss.cinch.swing.OnFocusChange;
 @Bindable
 public class FocusChangedExample {
 
-
-    static final Logger log = LogManager.getLogger(FocusChangedExample.class);
+    static final Logger log = LoggerFactory.getLogger(FocusChangedExample.class);
 
     public FocusChangedExample() {
         initializeInterface();
@@ -143,6 +152,7 @@ public class FocusChangedExample {
         try {
             UIManager.setLookAndFeel(UIManager.getCrossPlatformLookAndFeelClassName());
             EventQueue.invokeAndWait(new Runnable() {
+                @Override
                 public void run() {
                     new FocusChangedExample();
                 }

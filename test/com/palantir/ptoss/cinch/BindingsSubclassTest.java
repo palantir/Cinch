@@ -20,8 +20,6 @@ import javax.swing.JList;
 import javax.swing.JRadioButton;
 import javax.swing.JTextField;
 
-import junit.framework.TestCase;
-
 import com.palantir.ptoss.cinch.core.Bindable;
 import com.palantir.ptoss.cinch.core.Bindings;
 import com.palantir.ptoss.cinch.core.CallOnUpdate;
@@ -32,6 +30,8 @@ import com.palantir.ptoss.cinch.example.demo.DemoModel.DemoEnum;
 import com.palantir.ptoss.cinch.swing.Action;
 import com.palantir.ptoss.cinch.swing.Bound;
 import com.palantir.ptoss.cinch.swing.BoundSelection;
+
+import junit.framework.TestCase;
 
 
 public class BindingsSubclassTest extends TestCase {

@@ -31,7 +31,8 @@ import javax.swing.JList;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.google.common.base.Objects;
 import com.google.common.collect.ImmutableList;
@@ -76,7 +77,7 @@ public @interface BoundSelection {
      * Inner utility class that performs the runtime wiring of all {@link BoundSelection} bindings.
      */
     public static class Wiring implements BindingWiring {
-        private static final Logger logger = Logger.getLogger(BoundSelection.class);
+        private static final Logger logger = LoggerFactory.getLogger(BoundSelection.class);
 
         public Collection<Binding> wire(BindingContext context) {
             List<Field> boundFields = context.getAnnotatedFields(BoundSelection.class);

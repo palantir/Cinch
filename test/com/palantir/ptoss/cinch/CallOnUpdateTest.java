@@ -13,12 +13,12 @@
 //   limitations under the License.
 package com.palantir.ptoss.cinch;
 
-import junit.framework.TestCase;
-
 import com.palantir.ptoss.cinch.SimpleModel.UpdateTypes;
 import com.palantir.ptoss.cinch.core.Bindings;
 import com.palantir.ptoss.cinch.core.CallOnUpdate;
 import com.palantir.ptoss.cinch.core.ModelUpdates;
+
+import junit.framework.TestCase;
 
 public class CallOnUpdateTest extends TestCase {
 

@@ -24,10 +24,18 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.google.common.collect.Lists;
-import com.palantir.ptoss.cinch.core.*;
+import com.palantir.ptoss.cinch.core.BindableModel;
+import com.palantir.ptoss.cinch.core.Binding;
+import com.palantir.ptoss.cinch.core.BindingContext;
+import com.palantir.ptoss.cinch.core.BindingException;
+import com.palantir.ptoss.cinch.core.BindingWiring;
+import com.palantir.ptoss.cinch.core.Bindings;
+import com.palantir.ptoss.cinch.core.ModelUpdate;
+import com.palantir.ptoss.cinch.core.ObjectFieldMethod;
 
 /**
  * A binding that will set the enabled state of the annotated component to the state of a model
@@ -56,7 +64,7 @@ public @interface EnabledIf {
      * @see Bindings#STANDARD_BINDINGS
      */
     public static class Wiring implements BindingWiring {
-        private static final Logger logger = Logger.getLogger(EnabledIf.class);
+        private static final Logger logger = LoggerFactory.getLogger(EnabledIf.class);
 
         public Collection<Binding> wire(final BindingContext context) {
             final List<Field> actions = context.getAnnotatedFields(EnabledIf.class);

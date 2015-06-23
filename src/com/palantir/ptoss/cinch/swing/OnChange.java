@@ -28,7 +28,8 @@ import javax.swing.JTextField;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.google.common.collect.ImmutableList;
 import com.palantir.ptoss.cinch.core.Binding;
@@ -61,7 +62,7 @@ public @interface OnChange {
      *     Inner utility class that performs the runtime wiring of all {@link OnChange} bindings.
      */
     static class Wiring implements BindingWiring {
-        private static final Logger logger = Logger.getLogger(OnChange.class);
+        private static final Logger logger = LoggerFactory.getLogger(OnChange.class);
 
         public Collection<Binding> wire(BindingContext context) {
             List<Field> actions = context.getAnnotatedFields(OnChange.class);

@@ -18,11 +18,11 @@ import java.awt.BorderLayout;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-import junit.framework.TestCase;
-
 import com.palantir.ptoss.cinch.core.Bindings;
 import com.palantir.ptoss.cinch.core.DefaultBindableModel;
 import com.palantir.ptoss.cinch.swing.Bound;
+
+import junit.framework.TestCase;
 
 /**
  * This is meant to capture some feedback that was received about using Bindings with subclasses.

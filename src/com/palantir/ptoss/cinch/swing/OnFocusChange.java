@@ -26,10 +26,15 @@ import java.util.Collection;
 import java.util.List;
 
 import org.apache.commons.lang.StringUtils;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.google.common.collect.ImmutableList;
-import com.palantir.ptoss.cinch.core.*;
+import com.palantir.ptoss.cinch.core.Binding;
+import com.palantir.ptoss.cinch.core.BindingContext;
+import com.palantir.ptoss.cinch.core.BindingException;
+import com.palantir.ptoss.cinch.core.BindingWiring;
+import com.palantir.ptoss.cinch.core.ObjectFieldMethod;
 
 /**
  * A binding that will call one method when the bound component loses focus, and another method when
@@ -45,7 +50,7 @@ public @interface OnFocusChange {
      *     Inner utility class that performs the runtime wiring of all {@link OnFocusChange} bindings.
      */
     static class Wiring implements BindingWiring {
-        private static final Logger logger = Logger.getLogger(OnFocusChange.class);
+        private static final Logger logger = LoggerFactory.getLogger(OnFocusChange.class);
 
         private static String normalizeString(String string) {
             if (string == null || string.trim().length() == 0) {

@@ -23,7 +23,8 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Set;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.google.common.base.Strings;
 import com.google.common.collect.ImmutableList;
@@ -51,8 +52,9 @@ public @interface CallOnUpdate {
      * Utility class that performs the wiring for {@link CallOnUpdate} annotations.
      */
     static class Wiring implements BindingWiring {
-        private static final Logger logger = Logger.getLogger(CallOnUpdate.class);
+        private static final Logger logger = LoggerFactory.getLogger(CallOnUpdate.class);
 
+        @Override
         public Collection<Binding> wire(final BindingContext context) {
             final List<ObjectFieldMethod> methods = context.getAnnotatedParameterlessMethods(CallOnUpdate.class);
             final List<Binding> bindings = Lists.newArrayList();
@@ -89,6 +91,7 @@ public @interface CallOnUpdate {
             final Method actualMethod = method.getMethod();
             actualMethod.setAccessible(true);
             final Binding binding = new Binding() {
+                @Override
                 public <T extends Enum<?> & ModelUpdate> void update(final T... changed) {
                     if (!BindingContext.isOn(onObjects, changed)) {
                         return;

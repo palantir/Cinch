@@ -17,13 +17,13 @@ import java.util.List;
 
 import javax.swing.JComboBox;
 
-import junit.framework.TestCase;
-
 import com.google.common.collect.ImmutableList;
 import com.palantir.ptoss.cinch.core.Bindings;
 import com.palantir.ptoss.cinch.core.DefaultBindableModel;
 import com.palantir.ptoss.cinch.swing.Bound;
 import com.palantir.ptoss.cinch.swing.BoundSelection;
+
+import junit.framework.TestCase;
 
 public class BoundJComboBoxTest extends TestCase {
 

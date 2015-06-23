@@ -16,11 +16,11 @@ package com.palantir.ptoss.cinch;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import junit.framework.TestCase;
-
 import com.palantir.ptoss.cinch.core.Bindable;
 import com.palantir.ptoss.cinch.core.Bindings;
 import com.palantir.ptoss.cinch.swing.Action;
+
+import junit.framework.TestCase;
 
 @Bindable
 public class ActionTest extends TestCase {

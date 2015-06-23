@@ -15,10 +15,10 @@ package com.palantir.ptoss.cinch;
 
 import javax.swing.JCheckBox;
 
-import junit.framework.TestCase;
-
 import com.palantir.ptoss.cinch.core.Bindings;
 import com.palantir.ptoss.cinch.swing.Bound;
+
+import junit.framework.TestCase;
 
 public class BoundJCheckBoxTest extends TestCase {
 
