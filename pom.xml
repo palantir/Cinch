@@ -5,7 +5,7 @@
 	<groupId>com.palantir.opensource</groupId>
 	<artifactId>ptoss-cinch</artifactId>
 	<packaging>jar</packaging>
-	<version>1.0-SNAPSHOT</version>
+	<version>1.1</version>
 	<name>Palantir Technologies Cinch Java Binding Framework</name>
 	<url>https://github.com/palantir/Cinch</url>
 	<scm>
