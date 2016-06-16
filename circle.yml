@@ -5,8 +5,11 @@ test:
   override:
     - ./gradlew build --console=plain --info --stacktrace
 deployment:
-  release:
-    tag: /[0-9]+(\.[0-9]+)+(-rc[0-9]+)?/
+  master:
+    branch: master
     commands:
       - ./gradlew bintrayUpload  --console=plain --info --stacktrace
-      
+  release:
+    tag: /[0-9]+(\.[0-9]+)+/
+    commands:
+      - ./gradlew bintrayUpload  --console=plain --info --stacktrace
