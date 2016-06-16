@@ -16,7 +16,7 @@ apply plugin: 'maven-publish'
 apply plugin: 'com.jfrog.bintray'
 apply plugin: 'com.jfrog.artifactory'
 group = 'com.palantir.opensource'
-version = '1.1'
+version = System.env.CIRCLE_TAG
 
 description = """Palantir Technologies Cinch Java Binding Framework"""
 
@@ -57,7 +57,7 @@ bintray {
 }
 
 bintrayUpload.onlyIf {
-    System.env.BINTRAY_USER && System.env.BINTRAY_KEY && project.version ==~ /\d+\.\d+\.\d+/
+    System.env.BINTRAY_USER && System.env.BINTRAY_KEY && System.env.CIRCLE_TAG
 }
 
 bintrayUpload.dependsOn 'generatePomFileForBintrayPublication', 'build'
