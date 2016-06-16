@@ -9,17 +9,13 @@ buildscript {
     }
 }
 
-plugins {
-  id 'com.palantir.git-version' version '0.2.0'
-}
-
 apply plugin: 'java'
 apply plugin: 'eclipse'
 apply plugin: 'idea'
 apply plugin: 'maven-publish'
 apply plugin: 'com.jfrog.bintray'
 
-version = gitVersion()
+version = System.env.CIRCLE_TAG ?: System.env.CIRCLE_SHA1
 group = 'com.palantir.opensource'
 sourceCompatibility = 1.6
 targetCompatibility = 1.6
