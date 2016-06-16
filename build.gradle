@@ -49,7 +49,7 @@ bintray {
     key = System.env.BINTRAY_KEY
     pkg {
         repo = 'releases'
-        name = 'streams'
+        name = 'cinch'
         userOrg = 'palantir'
         licenses = ['Apache-2.0']
         publications = ['bintray']
