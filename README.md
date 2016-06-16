@@ -1,6 +1,9 @@
 ![Palantir Logo](https://github.com/palantir/Cinch/wiki/palantir-masthead.png)
 # Cinch - annotations to make MVC easy #
 
+[![CircleCI Build Status](https://circleci.com/gh/palantir/Cinch/tree/master.svg)](https://circleci.com/gh/palantir/Cinch)
+[![Download](https://api.bintray.com/packages/palantir/releases/Cinch/images/download.svg) ](https://bintray.com/palantir/releases/Cinch/_latestVersion)
+
 ---
 
 ### About #
