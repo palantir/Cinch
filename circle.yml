@@ -1,9 +1,12 @@
 machine:
   java:
     version: oraclejdk6
-
+test:
+  override:
+    - ./gradlew build --console=plain --info --stacktrace
 deployment:
   release:
     tag: /[0-9]+(\.[0-9]+)+(-rc[0-9]+)?/
     commands:
-      - ./gradlew -i bintrayUpload
+      - ./gradlew bintrayUpload  --console=plain --info --stacktrace
+      
