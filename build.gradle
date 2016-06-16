@@ -43,7 +43,7 @@ bintray {
     key = System.env.BINTRAY_PASSWORD
     pkg {
         repo = System.env.CIRCLE_TAG ? 'releases' : System.env.CIRCLE_SHA1 ? 'snapshots' : 'maven'
-        name = 'cinch'
+        name = 'Cinch'
         licenses = ['Apache-2.0']
         publications = ['bintray']
         version {
