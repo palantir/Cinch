@@ -44,6 +44,7 @@ bintray {
     pkg {
         repo = System.env.CIRCLE_TAG ? 'releases' : System.env.CIRCLE_SHA1 ? 'snapshots' : 'maven'
         name = 'Cinch'
+        userOrg = 'palantir'
         licenses = ['Apache-2.0']
         publications = ['bintray']
         version {
