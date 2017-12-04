@@ -4,3 +4,9 @@ target/
 *~
 .settings
 build/
+out/
+.classpath
+.project
+*.iml
+*.ipr
+*.iws

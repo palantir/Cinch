@@ -13,6 +13,8 @@
 //   limitations under the License.
 package com.palantir.ptoss.cinch.core;
 
+import java.io.IOException;
+import java.io.ObjectInputStream;
 import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
 
@@ -21,7 +23,13 @@ import java.util.concurrent.CopyOnWriteArrayList;
  */
 public class DefaultBindableModel implements BindableModel {
 
-    private final List<Binding> bindings = new CopyOnWriteArrayList<Binding>();
+    // must be transient because Bindings aren't serializable, and
+    // subclasses might be serialized.
+    private transient List<Binding> bindings;
+
+    public DefaultBindableModel() {
+        bindings = new CopyOnWriteArrayList<Binding>();
+    }
 
     /**
      * {@inheritDoc}
@@ -60,6 +68,11 @@ public class DefaultBindableModel implements BindableModel {
      */
     public void update() {
         this.modelUpdated(ModelUpdates.UNSPECIFIED);
+    }
+
+    private void readObject(ObjectInputStream in) throws IOException, ClassNotFoundException {
+        in.defaultReadObject();
+        bindings = new CopyOnWriteArrayList<Binding>();
     }
 
 }
