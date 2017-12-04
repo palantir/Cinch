@@ -25,7 +25,7 @@ public class DefaultBindableModel implements BindableModel {
 
     // must be transient because Bindings aren't serializable, and
     // subclasses might be serialized.
-    private transient volatile List<Binding> bindings;
+    private transient List<Binding> bindings;
 
     public DefaultBindableModel() {
         bindings = new CopyOnWriteArrayList<Binding>();
