@@ -55,10 +55,9 @@ configurations.all {
 
 dependencies {
     compile group: 'com.google.guava', name: 'guava'
-    compile group: 'commons-lang', name: 'commons-lang'
-    compile group: 'commons-io', name: 'commons-io'
     compile group: 'org.slf4j', name: 'slf4j-api'
     testRuntime group: 'org.slf4j', name: 'slf4j-simple'
+    testCompile group: 'org.apache.commons', name: 'commons-lang3'
     testCompile group: 'junit', name: 'junit'
     testCompile group: 'de.ruedigermoeller', name: 'fst'
 }

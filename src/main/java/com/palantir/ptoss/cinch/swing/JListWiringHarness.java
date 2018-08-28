@@ -24,8 +24,6 @@ import javax.swing.JList;
 import javax.swing.ListModel;
 import javax.swing.table.DefaultTableModel;
 
-import org.apache.commons.lang.ArrayUtils;
-
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
@@ -54,6 +52,9 @@ import com.palantir.ptoss.util.Mutator;
  * selection between model swaps is simply done with {@link Object#equals(Object)} comparisons.
  */
 public class JListWiringHarness implements WiringHarness<Bound, Field> {
+
+    private static final int[] EMPTY_INT_ARRAY = new int[0];
+
     public Collection<Binding> wire(Bound bound, BindingContext context, Field field)
             throws IllegalAccessException, IntrospectionException {
         JList list = context.getFieldObject(field, JList.class);
@@ -93,6 +94,7 @@ public class JListWiringHarness implements WiringHarness<Bound, Field> {
         }
         Object[] selected = list.getSelectedValues();
         DefaultListModel listModel = new DefaultListModel();
+        listModel.ensureCapacity(newContents.size());
         for (Object obj : newContents) {
             listModel.addElement(obj);
         }
@@ -104,6 +106,19 @@ public class JListWiringHarness implements WiringHarness<Bound, Field> {
                 newIndices.add(i);
             }
         }
-        list.setSelectedIndices(ArrayUtils.toPrimitive(newIndices.toArray(new Integer[0])));
+        list.setSelectedIndices(toPrimitive(newIndices));
+    }
+
+    private static int[] toPrimitive(List<Integer> newIndices) {
+        int size = newIndices.size();
+        if (size == 0) {
+            return EMPTY_INT_ARRAY;
+        }
+
+        int[] array = new int[size];
+        for (int i = 0; i < size; i++) {
+            array[i] = newIndices.get(i);
+        }
+        return array;
     }
 }

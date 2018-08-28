@@ -25,7 +25,6 @@ import java.lang.reflect.Method;
 import java.util.Collection;
 import java.util.List;
 
-import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -53,7 +52,7 @@ public @interface OnFocusChange {
         private static final Logger logger = LoggerFactory.getLogger(OnFocusChange.class);
 
         private static String normalizeString(String string) {
-            if (string == null || string.trim().length() == 0) {
+            if (Bound.Utilities.isNullOrBlank(string)) {
                 return null;
             }
             return string;
@@ -65,7 +64,7 @@ public @interface OnFocusChange {
                 OnFocusChange focusChange = field.getAnnotation(OnFocusChange.class);
                 String lost = normalizeString(focusChange.lost());
                 String gained = normalizeString(focusChange.gained());
-                if (StringUtils.isEmpty(lost) && StringUtils.isEmpty(gained)) {
+                if (Bound.Utilities.isNullOrBlank(lost) && Bound.Utilities.isNullOrBlank(gained)) {
                     throw new BindingException("either lost or gained must be specified on @OnFocusChange on " + field.getName());
                 }
                 try {

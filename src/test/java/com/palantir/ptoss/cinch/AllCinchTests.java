@@ -18,6 +18,7 @@ import com.palantir.ptoss.cinch.negative.InaccessibleControllerMethodTest;
 import com.palantir.ptoss.cinch.negative.NegativeActionTest;
 import com.palantir.ptoss.cinch.negative.WrongTypeTest;
 
+import com.palantir.ptoss.cinch.swing.BoundTest;
 import junit.framework.Test;
 import junit.framework.TestSuite;
 
@@ -50,6 +51,7 @@ public class AllCinchTests {
         suite.addTestSuite(BoundJSliderTest.class);
         suite.addTestSuite(BoundJTextComponentTest.class);
         suite.addTestSuite(BoundJListTest.class);
+        suite.addTestSuite(BoundTest.class);
         //$JUnit-END$
         return suite;
     }

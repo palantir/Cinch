@@ -13,6 +13,7 @@
 //   limitations under the License.
 package com.palantir.ptoss.cinch.swing;
 
+import com.google.common.base.Preconditions;
 import java.beans.IntrospectionException;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
@@ -23,8 +24,6 @@ import java.util.Collections;
 import javax.swing.JPasswordField;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
-
-import org.apache.commons.lang.Validate;
 
 import com.palantir.ptoss.cinch.core.BindableModel;
 import com.palantir.ptoss.cinch.core.Binding;
@@ -51,7 +50,7 @@ public class JPasswordFieldWiringHarness implements WiringHarness<Bound, Field> 
         }
         BindableModel model1 = context.getFieldObject(setter.getField(), BindableModel.class);
         BindableModel model2 = context.getFieldObject(getter.getField(), BindableModel.class);
-        Validate.isTrue(model1 == model2);
+        Preconditions.checkArgument(model1 == model2, "setter not bound to same field as getter");
         // verify type parameters
         return bindJPasswordField(model1, pwdField, getter.getMethod(), setter.getMethod());
     }
