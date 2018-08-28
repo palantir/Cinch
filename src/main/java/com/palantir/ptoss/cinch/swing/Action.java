@@ -106,7 +106,8 @@ import com.palantir.ptoss.cinch.core.ObjectFieldMethod;
  *
  *     // main()
  * }
- * </pre></code>
+ * </code>
+ * </pre>
  *
  * <h2>Methods available to &#064;Actions</h2>
  * <p>The following are callable from &#064;Actions:

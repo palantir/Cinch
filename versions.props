@@ -1,0 +1,6 @@
+com.google.guava:* = 18.0
+commons-io:commons-io = 2.1
+commons-lang:commons-lang = 2.6
+de.ruedigermoeller:fst = 2.55
+junit:junit = 4.12
+org.slf4j:* = 1.7.5
