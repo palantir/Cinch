@@ -2,25 +2,38 @@ buildscript {
     repositories {
         jcenter()
         maven {
+            url 'https://dl.bintray.com/palantir/releases/'
+        }
+        maven {
             url "https://plugins.gradle.org/m2/"
         }
     }
 
     dependencies {
+        classpath 'com.netflix.nebula:nebula-dependency-recommender:6.0.0'
+        classpath 'com.netflix.nebula:nebula-publishing-plugin:8.2.0'
         classpath 'gradle.plugin.com.palantir:gradle-circle-style:1.1.4'
         classpath 'com.jfrog.bintray.gradle:gradle-bintray-plugin:1.8.4'
+        classpath 'com.palantir.gradle.gitversion:gradle-git-version:0.11.0'
         classpath "org.jfrog.buildinfo:build-info-extractor-gradle:4.7.5"
+        classpath 'com.palantir.configurationresolver:gradle-configuration-resolver-plugin:0.3.0'
     }
 }
 
 apply plugin: 'java'
 apply plugin: 'eclipse'
 apply plugin: 'idea'
-apply plugin: 'maven-publish'
 apply plugin: 'com.jfrog.bintray'
 apply plugin: 'com.palantir.circle.style'
+apply plugin: 'com.palantir.configuration-resolver'
+apply plugin: 'com.palantir.git-version'
+apply plugin: 'nebula.maven-base-publish'
+apply plugin: 'nebula.maven-resolved-dependencies'
+apply plugin: 'nebula.javadoc-jar'
+apply plugin: 'nebula.source-jar'
+apply plugin: 'nebula.dependency-recommender'
 
-version = System.env.CIRCLE_TAG ?: System.env.CIRCLE_SHA1
+version gitVersion()
 group = 'com.palantir.opensource'
 sourceCompatibility = 1.6
 targetCompatibility = 1.6
@@ -29,19 +42,34 @@ repositories {
     jcenter()
 }
 
-dependencies {
-    compile group: 'com.google.guava', name: 'guava', version:'18.0'
-    compile group: 'commons-lang', name: 'commons-lang', version:'2.6'
-    compile group: 'commons-io', name: 'commons-io', version:'2.1'
-    compile group: 'org.slf4j', name: 'slf4j-api', version:'1.7.5'
-    testRuntime group: 'org.slf4j', name: 'slf4j-simple', version:'1.7.5'
-    testCompile group: 'junit', name: 'junit', version:'4.11'
-    testCompile group: 'de.ruedigermoeller', name: 'fst', version: '2.55'
+dependencyRecommendations {
+    strategy OverrideTransitives
+    propertiesFile file: project.rootProject.file('versions.props')
 }
 
-task sourceJar(type: Jar) {
-    from sourceSets.main.allSource
-    classifier 'sources'
+configurations.all {
+    resolutionStrategy {
+        failOnVersionConflict()
+    }
+}
+
+dependencies {
+    compile group: 'com.google.guava', name: 'guava'
+    compile group: 'commons-lang', name: 'commons-lang'
+    compile group: 'commons-io', name: 'commons-io'
+    compile group: 'org.slf4j', name: 'slf4j-api'
+    testRuntime group: 'org.slf4j', name: 'slf4j-simple'
+    testCompile group: 'junit', name: 'junit'
+    testCompile group: 'de.ruedigermoeller', name: 'fst'
+}
+
+jar {
+    manifest {
+        attributes(
+                "Implementation-Title"   : project.name,
+                "Implementation-Version" : project.version,
+                "Implementation-Vendor"  : "Palantir Technologies Inc.")
+    }
 }
 
 bintray {
@@ -49,11 +77,11 @@ bintray {
     key = System.env.BINTRAY_PASSWORD
     publish = true
     pkg {
-        repo = System.env.CIRCLE_TAG ? 'releases' : System.env.CIRCLE_SHA1 ? 'snapshots' : 'maven'
+        repo = 'releases'
         name = 'Cinch'
         userOrg = 'palantir'
         licenses = ['Apache-2.0']
-        publications = ['bintray']
+        publications = ['nebula']
         version {
             name = project.version
             vcsUrl = 'https://github.com/palantir/Cinch.git'
@@ -63,14 +91,21 @@ bintray {
 
 publishing {
     publications {
-        bintray(MavenPublication) {
+        nebula(MavenPublication) {
             from components.java
-            artifact(sourceJar)
         }
     }
 }
 
-tasks.build.dependsOn sourceJar
-tasks.bintrayUpload.dependsOn 'generatePomFileForBintrayPublication', 'build'
-tasks.publish.dependsOn bintrayUpload
+ext {
+    releaseVersionRegex = /[0-9]+(\.[0-9]+)+(-[a-zA-Z]+[0-9]*)*/
+}
 
+bintrayUpload.onlyIf {
+    System.env.BINTRAY_USERNAME && System.env.BINTRAY_PASSWORD && project.version ==~ releaseVersionRegex
+}
+
+publish.dependsOn bintrayUpload
+bintrayUpload.dependsOn { generatePomFileForNebulaPublication }
+bintrayUpload.dependsOn { sourceJar }
+bintrayUpload.dependsOn { build }
