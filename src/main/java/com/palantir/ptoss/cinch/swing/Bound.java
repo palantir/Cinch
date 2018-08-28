@@ -33,8 +33,6 @@ import javax.swing.JSlider;
 import javax.swing.JToggleButton;
 import javax.swing.text.JTextComponent;
 
-import org.apache.commons.lang.StringUtils;
-import org.apache.commons.lang.mutable.MutableBoolean;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -105,7 +103,7 @@ public @interface Bound {
          */
         public static Object getNullValue(BindingContext context, String nullValue) {
             final String finalNullValue;
-            if (StringUtils.isBlank(nullValue)) {
+            if (isNullOrBlank(nullValue)) {
                 finalNullValue = null;
             } else {
                 Object constant = context.getBindableConstant(nullValue);
@@ -116,6 +114,21 @@ public @interface Bound {
                 }
             }
             return finalNullValue;
+        }
+
+        static boolean isNullOrBlank(String string) {
+            if (string == null) {
+                return true;
+            }
+            int length = string.length();
+            if (length > 0) {
+                for (int i = 0; i < length; i++) {
+                    if (!Character.isWhitespace(string.charAt(i))) {
+                        return false;
+                    }
+                }
+            }
+            return true;
         }
     }
 
@@ -152,11 +165,11 @@ public @interface Bound {
         }
 
         private static Collection<Binding> wire(final Bound bound, final BindingContext context, final Field field) {
-            final MutableBoolean didBind = new MutableBoolean();
+            final boolean[] didBind = new boolean[1];
             final List<Binding> bindings = Lists.newArrayList();
             Reflections.visitClassHierarchy(field.getType(), new Visitor<Class<?>>() {
                 public void visit(Class<?> klass){
-                    if (didBind.booleanValue()) {
+                    if (didBind[0]) {
                         return;
                     }
                     WiringHarness<Bound, Field> wiringHarness = wiringHarnesses.get(klass);
@@ -165,13 +178,13 @@ public @interface Bound {
                     }
                     try {
                         bindings.addAll(wiringHarness.wire(bound, context, field));
-                        didBind.setValue(true);
+                        didBind[0] = true;
                     } catch (Exception e) {
                         throw Throwables.throwUncheckedException(e);
                     }
                 }
             });
-            if (!didBind.booleanValue()) {
+            if (!didBind[0]) {
                 throw new BindingException("don't know how to wire up @Bound field: " + field.getName());
             }
             return bindings;

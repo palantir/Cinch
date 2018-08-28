@@ -2,7 +2,7 @@ package com.palantir.ptoss.cinch;
 
 import com.palantir.ptoss.cinch.core.Binding;
 import com.palantir.ptoss.cinch.core.ModelUpdate;
-import org.apache.commons.lang.SerializationUtils;
+import org.apache.commons.lang3.SerializationUtils;
 import org.junit.Assert;
 import org.junit.Test;
 import org.nustaq.serialization.FSTConfiguration;

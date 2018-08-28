@@ -23,8 +23,6 @@ import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
 import java.util.List;
 
-import org.apache.commons.lang.mutable.MutableBoolean;
-
 import com.google.common.base.Function;
 import com.google.common.base.Predicate;
 import com.google.common.collect.Lists;
@@ -249,15 +247,15 @@ public class Reflections {
      * passed {@link Annotation}
      */
     public static boolean isClassAnnotatedForClassHierarchy(Object object, final Class<? extends Annotation> annotation) {
-        final MutableBoolean bool = new MutableBoolean(false);
+        final boolean[] bool = new boolean[1];
         visitClassHierarchy(object.getClass(), new Visitor<Class<?>>() {
             public void visit(Class<?> klass) {
                 if (klass.isAnnotationPresent(annotation)) {
-                    bool.setValue(true);
+                    bool[0] = true;
                 }
             }
         });
-        return bool.booleanValue();
+        return bool[0];
     }
 
     /**
@@ -348,14 +346,12 @@ public class Reflections {
                     try {
                         return returnType.cast(readMethod.invoke(from));
                     } catch (Exception e) {
-                        Throwables.throwUncheckedException(e);
-                        return null;
+                        throw Throwables.throwUncheckedException(e);
                     }
                 }
             };
         } catch (IntrospectionException e) {
-            Throwables.throwUncheckedException(e);
-            return null;
+            throw Throwables.throwUncheckedException(e);
         }
     }
 }

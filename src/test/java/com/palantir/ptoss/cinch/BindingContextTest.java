@@ -125,4 +125,5 @@ public class BindingContextTest extends TestCase {
         BindingContext context = new BindingContext(this);
         assertEquals(model, context.getBindableModel("model"));
     }
+
 }

@@ -13,6 +13,7 @@
 //   limitations under the License.
 package com.palantir.ptoss.cinch.core;
 
+import com.google.common.base.Preconditions;
 import java.beans.BeanInfo;
 import java.beans.IntrospectionException;
 import java.beans.Introspector;
@@ -24,8 +25,6 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
-
-import org.apache.commons.lang.Validate;
 
 import com.google.common.base.Function;
 import com.google.common.base.Functions;
@@ -98,7 +97,7 @@ public class BindingContext {
      * @param object the object - cannot be null
      */
     public BindingContext(Object object) {
-        Validate.notNull(object);
+        Preconditions.checkNotNull(object, "object");
         this.object = object;
         try {
             bindableModels = indexBindableModels();
@@ -192,6 +191,21 @@ public class BindingContext {
         return findOnObject(on, model);
     }
 
+    private static boolean isNullOrBlank(String string) {
+        if (string == null) {
+            return true;
+        }
+        int length = string.length();
+        if (length > 0) {
+            for (int i = 0; i < length; i++) {
+                if (!Character.isWhitespace(string.charAt(i))) {
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
+
     /**
      * Returns the list of {@link ModelUpdate} types in this binding context.
      * @param modelClass
@@ -228,7 +242,7 @@ public class BindingContext {
      */
     public static ModelUpdate findOnObject(final String on, final BindableModel model) {
         ModelUpdate onObject = null;
-        if (on != null && on.trim().length() > 0) {
+        if (!isNullOrBlank(on)) {
             final List<Class<?>> updateClasses = findModelUpdateClass(model);
             for (Class<?> updateClass : updateClasses) {
                 try {
