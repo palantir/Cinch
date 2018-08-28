@@ -4,6 +4,7 @@ buildscript {
     }
 
     dependencies {
+        classpath 'gradle.plugin.com.palantir:gradle-circle-style:1.1.4'
         classpath 'com.jfrog.bintray.gradle:gradle-bintray-plugin:1.8.4'
         classpath "org.jfrog.buildinfo:build-info-extractor-gradle:4.7.5"
     }
@@ -14,6 +15,7 @@ apply plugin: 'eclipse'
 apply plugin: 'idea'
 apply plugin: 'maven-publish'
 apply plugin: 'com.jfrog.bintray'
+apply plugin: 'com.palantir.circle.style'
 
 version = System.env.CIRCLE_TAG ?: System.env.CIRCLE_SHA1
 group = 'com.palantir.opensource'
@@ -67,3 +69,5 @@ publishing {
 
 tasks.build.dependsOn sourceJar
 tasks.bintrayUpload.dependsOn 'generatePomFileForBintrayPublication', 'build'
+tasks.publish.dependsOn bintrayUpload
+
