@@ -15,7 +15,6 @@ buildscript {
         classpath 'gradle.plugin.com.palantir:gradle-circle-style:1.1.4'
         classpath 'com.jfrog.bintray.gradle:gradle-bintray-plugin:1.8.4'
         classpath 'com.palantir.gradle.gitversion:gradle-git-version:0.11.0'
-        classpath "org.jfrog.buildinfo:build-info-extractor-gradle:4.7.5"
         classpath 'com.palantir.configurationresolver:gradle-configuration-resolver-plugin:0.3.0'
     }
 }
