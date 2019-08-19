@@ -1,5 +1,5 @@
 com.google.guava:* = 18.0
 de.ruedigermoeller:fst = 2.55
 junit:junit = 4.12
-org.apache.commons:commons-lang3 = 3.8.1
+org.apache.commons:commons-lang3 = 3.9
 org.slf4j:* = 1.7.5
