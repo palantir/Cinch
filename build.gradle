@@ -12,7 +12,6 @@ buildscript {
     dependencies {
         classpath 'com.netflix.nebula:nebula-dependency-recommender:6.0.0'
         classpath 'com.netflix.nebula:nebula-publishing-plugin:8.2.0'
-        classpath 'gradle.plugin.com.palantir:gradle-circle-style:1.1.4'
         classpath 'com.jfrog.bintray.gradle:gradle-bintray-plugin:1.8.4'
         classpath 'com.palantir.gradle.gitversion:gradle-git-version:0.11.0'
         classpath "org.jfrog.buildinfo:build-info-extractor-gradle:4.7.5"
@@ -24,7 +23,6 @@ apply plugin: 'java'
 apply plugin: 'eclipse'
 apply plugin: 'idea'
 apply plugin: 'com.jfrog.bintray'
-apply plugin: 'com.palantir.circle.style'
 apply plugin: 'com.palantir.configuration-resolver'
 apply plugin: 'com.palantir.git-version'
 apply plugin: 'nebula.maven-base-publish'
