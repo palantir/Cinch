@@ -21,7 +21,7 @@ Cinch uses Java annotations to reflectively wire up Models, Views, and Controlle
 * Mailing lists are hosted on Google Groups:
     * [Announce](http://groups.google.com/group/ptoss-cinch-announce)
     * [General](http://groups.google.com/group/ptoss-cinch)
-* Please file issues on the [Github Issue Tracker](/palantir/Cinch/issues)
+* Please file issues on the [Github Issue Tracker](https://github.com/palantir/Cinch/issues)
 * Email project admin: [Ari Gesher](mailto:agesher@palantir.com)
 
 ## Example: [IntroCinchMVC.java](http://github.com/palantir/Cinch/blob/master/example/com/palantir/ptoss/cinch/example/IntroCinchMVC.java)
