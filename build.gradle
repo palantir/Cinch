@@ -7,7 +7,7 @@ buildscript {
     }
 
     dependencies {
-        classpath 'com.palantir.gradle.externalpublish:gradle-external-publish-plugin:0.4.10'
+        classpath 'com.palantir.gradle.externalpublish:gradle-external-publish-plugin:1.0.1'
         classpath 'com.netflix.nebula:nebula-dependency-recommender:6.0.0'
         classpath 'com.palantir.gradle.gitversion:gradle-git-version:0.12.3'
         classpath 'com.palantir.configurationresolver:gradle-configuration-resolver-plugin:0.3.0'
