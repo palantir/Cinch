@@ -2,7 +2,6 @@ buildscript {
     repositories {
         gradlePluginPortal()
         mavenCentral()
-        maven { url 'https://palantir.bintray.com/releases' }
         jcenter()
     }
 
@@ -33,7 +32,6 @@ targetCompatibility = 1.6
 
 repositories {
     mavenCentral()
-    maven { url 'https://palantir.bintray.com/releases' }
     jcenter()
 }
 
