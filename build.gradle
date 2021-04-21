@@ -7,18 +7,17 @@ buildscript {
     }
 
     dependencies {
+        classpath 'com.palantir.gradle.externalpublish:gradle-external-publish-plugin:0.4.10'
         classpath 'com.netflix.nebula:nebula-dependency-recommender:6.0.0'
-        classpath 'com.netflix.nebula:nebula-publishing-plugin:17.3.2'
-        classpath 'com.jfrog.bintray.gradle:gradle-bintray-plugin:1.8.4'
         classpath 'com.palantir.gradle.gitversion:gradle-git-version:0.12.3'
         classpath 'com.palantir.configurationresolver:gradle-configuration-resolver-plugin:0.3.0'
     }
 }
 
+apply plugin: 'com.palantir.external-publish-jar'
 apply plugin: 'java'
 apply plugin: 'eclipse'
 apply plugin: 'idea'
-apply plugin: 'com.jfrog.bintray'
 apply plugin: 'com.palantir.configuration-resolver'
 apply plugin: 'com.palantir.git-version'
 apply plugin: 'nebula.maven-base-publish'
@@ -66,41 +65,3 @@ jar {
                 "Implementation-Vendor"  : "Palantir Technologies Inc.")
     }
 }
-
-bintray {
-    user = System.env.BINTRAY_USERNAME
-    key = System.env.BINTRAY_PASSWORD
-    publish = true
-    pkg {
-        repo = 'releases'
-        name = 'Cinch'
-        userOrg = 'palantir'
-        licenses = ['Apache-2.0']
-        publications = ['nebula']
-        version {
-            name = project.version
-            vcsUrl = 'https://github.com/palantir/Cinch.git'
-        }
-    }
-}
-
-publishing {
-    publications {
-        nebula(MavenPublication) {
-            from components.java
-        }
-    }
-}
-
-ext {
-    releaseVersionRegex = /[0-9]+(\.[0-9]+)+(-[a-zA-Z]+[0-9]*)*/
-}
-
-bintrayUpload.onlyIf {
-    System.env.BINTRAY_USERNAME && System.env.BINTRAY_PASSWORD && project.version ==~ releaseVersionRegex
-}
-
-publish.dependsOn bintrayUpload
-bintrayUpload.dependsOn { generatePomFileForNebulaPublication }
-bintrayUpload.dependsOn { sourceJar }
-bintrayUpload.dependsOn { build }
