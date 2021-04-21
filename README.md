@@ -2,7 +2,7 @@
 # Cinch - annotations to make MVC easy #
 
 [![CircleCI Build Status](https://circleci.com/gh/palantir/Cinch/tree/master.svg)](https://circleci.com/gh/palantir/Cinch)
-[![Download](https://api.bintray.com/packages/palantir/releases/Cinch/images/download.svg) ](https://bintray.com/palantir/releases/Cinch/_latestVersion)
+![Maven Central](https://img.shields.io/maven-central/v/com.palantir.opensource/cinch)
 
 ---
 
