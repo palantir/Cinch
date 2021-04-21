@@ -1,4 +1,4 @@
-com.google.guava:* = 30.1.1-jre
+com.google.guava:guava = 30.1.1-jre
 de.ruedigermoeller:fst = 2.55
 junit:junit = 4.13.2
 org.apache.commons:commons-lang3 = 3.12.0
