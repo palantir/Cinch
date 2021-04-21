@@ -2,7 +2,6 @@ buildscript {
     repositories {
         gradlePluginPortal()
         mavenCentral()
-        maven { url 'https://palantir.bintray.com/releases' }
         jcenter()
     }
 
@@ -10,7 +9,7 @@ buildscript {
         classpath 'com.palantir.gradle.externalpublish:gradle-external-publish-plugin:1.0.1'
         classpath 'com.netflix.nebula:nebula-dependency-recommender:6.0.0'
         classpath 'com.palantir.gradle.gitversion:gradle-git-version:0.12.3'
-        classpath 'com.palantir.configurationresolver:gradle-configuration-resolver-plugin:0.3.0'
+        classpath 'com.palantir.configurationresolver:gradle-configuration-resolver-plugin:0.4.0'
     }
 }
 
@@ -33,7 +32,6 @@ targetCompatibility = 1.6
 
 repositories {
     mavenCentral()
-    maven { url 'https://palantir.bintray.com/releases' }
     jcenter()
 }
 
