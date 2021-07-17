@@ -2,7 +2,6 @@ buildscript {
     repositories {
         gradlePluginPortal()
         mavenCentral()
-        jcenter()
     }
 
     dependencies {
@@ -32,7 +31,6 @@ targetCompatibility = 1.8
 
 repositories {
     mavenCentral()
-    jcenter()
 }
 
 dependencyRecommendations {
