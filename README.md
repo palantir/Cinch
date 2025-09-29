@@ -1,3 +1,7 @@
+<p align="right">
+<a href="https://autorelease.general.dmz.palantir.tech/palantir/Cinch"><img src="https://img.shields.io/badge/Perform%20an-Autorelease-success.svg" alt="Autorelease"></a>
+</p>
+
 ![Palantir Logo](https://github.com/palantir/Cinch/wiki/palantir-masthead.png)
 # Cinch - annotations to make MVC easy #
 
